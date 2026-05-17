@@ -72,7 +72,8 @@ app.get("/api/auth/github/callback", async (req, res) => {
       { headers: { Accept: "application/json" } }
     );
     const accessToken = tokenResponse.data.access_token;
-    res.redirect(`${process.env.FRONTEND_URL}?github_connected=true&token=${accessToken}`);
+    const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173';
+    res.redirect(`${frontendUrl}?token=${accessToken}`);
   } catch (error) {
     console.error(error.response?.data || error.message);
     res.status(500).send("GitHub OAuth failed");

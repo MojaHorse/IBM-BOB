@@ -4,8 +4,5 @@ nixPkgs = ["nodejs_18"]
 [phases.install]
 cmds = ["npm ci"]
 
-[phases.build]
-cmds = ["echo 'No build step required'"]
-
 [start]
 cmd = "node server.js"

@@ -18,7 +18,14 @@ const { extractSignals } = require("./services/intelligence/signalExtractor");
 const app = express();
 const PORT = process.env.PORT || 4500;
 
-app.use(cors());
+// Dynamic CORS configuration for production
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // ── State Store ──────────────────────────────────────────────────
@@ -41,8 +48,10 @@ app.get("/api/health", (req, res) => {
 // ── GitHub OAuth ─────────────────────────────────────────────────
 
 app.get("/api/auth/github", (req, res) => {
+  const backendUrl = process.env.BACKEND_URL || `http://localhost:${PORT}`;
   const params = new URLSearchParams({
     client_id: process.env.GITHUB_CLIENT_ID,
+    redirect_uri: `${backendUrl}/api/auth/github/callback`,
     scope: "repo",
     state: "bob-demo"
   });

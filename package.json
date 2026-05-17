@@ -1,0 +1,12 @@
+{
+  "name": "ibm-bob",
+  "version": "1.0.0",
+  "scripts": {
+    "frontend": "npm run dev --prefix frontend",
+    "backend": "node backend/server.js",
+    "dev": "npm run frontend"
+  },
+  "dependencies": {
+    "axios": "^1.16.0"
+  }
+}

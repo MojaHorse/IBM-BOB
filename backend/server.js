@@ -43,7 +43,6 @@ app.get("/api/health", (req, res) => {
 app.get("/api/auth/github", (req, res) => {
   const params = new URLSearchParams({
     client_id: process.env.GITHUB_CLIENT_ID,
-    redirect_uri: "http://localhost:4500/api/auth/github/callback",
     scope: "repo",
     state: "bob-demo"
   });
